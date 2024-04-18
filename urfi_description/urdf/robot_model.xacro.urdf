@@ -13,12 +13,71 @@
     </joint>
 
     <xacro:base mass="19.95" x_size="0.3" y_size="0.1" z_size="0.7" roll_offset="1.5708" pitch_offset="0.0" yaw_offset="1.5708" color="blue"/>
+    <joint name="base_lidar_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0"/>
+      <parent link="base_link"/>
+      <child link="base_lidar_link"/>
+    </joint>
+
+    <link name="lidar_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder length="0.0258" radius="0.03185"/>
+          <material name="red">
+            <color rgba="1.0 0.0 0.0 1.0"/>
+          </material>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+        <geometry>
+          <cylinder length="0.0258" radius="0.03185"/>
+        </geometry>
+      </collision>
+      <mass value="0.1"/>
+    </link>
+
+    <joint name="lidar_joint" type="fixed">
+      <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0"/>
+      <parent link="base_lidar_link"/>
+      <child link="lidar_link"/>
+    </joint>
+
+    <xacro:base link_name="base_lidar_link" mass="4.0" x_size="0.1" y_size="0.1" z_size="0.1" roll_offset="1.5708" pitch_offset="0.0" yaw_offset="1.5708" color="green"/>
     <xacro:wheel prefix="right_1" reflect="-1" radius="0.1" length = "0.075" mass = "119.76 " x_offset="-0.2" y_offset="0" base_x="0.1" base_y="0.3" />
     <xacro:wheel prefix="left_1" reflect="1" radius="0.1" length = "0.075" mass = "119.76  " x_offset="-0.2" y_offset="0" base_x="0.1" base_y="0.3" />
     <xacro:wheel prefix="left_2" reflect="1" radius="0.1" length = "0.075" mass = "119.76  " x_offset="0.05" y_offset="0" base_x="0.1" base_y="0.3" />
     <xacro:wheel prefix="right_2" reflect="-1" radius="0.1" length = "0.075" mass = "119.76  " x_offset="0.05" y_offset="0" base_x="0.1" base_y="0.3" />
     <xacro:wheel prefix="left_3" reflect="1" radius="0.1" length = "0.075" mass = "119.76  " x_offset="0.3" y_offset="0" base_x="0.1" base_y="0.3" />
     <xacro:wheel prefix="right_3" reflect="-1" radius="0.1" length = "0.075" mass = "119.76  " x_offset="0.3" y_offset="0" base_x="0.1" base_y="0.3" />
+
+    <gazebo reference="lidar_link">
+      <sensor type="gpu_lidar" name="lidar_sensor">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>true</visualize>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>1000</samples>
+              <resolution>1</resolution>
+              <min_angle>-1.57</min_angle>
+              <max_angle>1.57</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>10.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+          <topicName>/scan</topicName>
+          <frameName>${name}_lidar_link</frameName>
+        </plugin>
+      </sensor>
+    </gazebo>
 
     <ros2_control name="IgnitionSystem" type="system">
         <hardware>

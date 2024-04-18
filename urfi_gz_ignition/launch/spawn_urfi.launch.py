@@ -101,7 +101,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(
                 [os.path.join(get_package_share_directory('ros_ign_gazebo'),
                               'launch', 'ign_gazebo.launch.py')]),
-            launch_arguments=[('gz_args', [' -r -v 4 /home/alexoberco/Escritorio/ros2_ws/src/urfi_project/urfi_description/worlds/building_robot.sdf'])]),
+            launch_arguments=[('gz_args', [' -r -v 4 src/urfi_project/urfi_description/worlds/building_robot.sdf'])]),
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=ignition_spawn_entity,

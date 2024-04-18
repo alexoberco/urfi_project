@@ -25,5 +25,8 @@
   <material name="dark_grey">
     <color rgba="0.3 0.3 0.3 1"/>
   </material>
+  <material name="green">
+    <color rgba="0.0 1.0 0.0 1.0"/>
+  </material>
 
 </robot>
