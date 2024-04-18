@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_model">
+    <xacro:property name="package_name" value="urfi_description"/>
+    <xacro:include filename="$(find ${package_name})/urdf/include/common_inertial_math.urdf.xacro" />
+    <xacro:include filename="$(find ${package_name})/urdf/include/material.urdf.xacro" />
+    <xacro:include filename="$(find ${package_name})/urdf/include/common_macros_robot.urdf.xacro" />
+    <link name="base_footprint"/>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+    <xacro:base mass="19.95" x_size="0.3" y_size="0.1" z_size="0.7" roll_offset="1.5708" pitch_offset="0.0" yaw_offset="1.5708" color="blue"/>
+    <xacro:wheel prefix="right_1" reflect="-1" radius="0.1" length = "0.075" mass = "119.76 " x_offset="-0.2" y_offset="0" base_x="0.1" base_y="0.3" />
+    <xacro:wheel prefix="left_1" reflect="1" radius="0.1" length = "0.075" mass = "119.76  " x_offset="-0.2" y_offset="0" base_x="0.1" base_y="0.3" />
+    <xacro:wheel prefix="left_2" reflect="1" radius="0.1" length = "0.075" mass = "119.76  " x_offset="0.05" y_offset="0" base_x="0.1" base_y="0.3" />
+    <xacro:wheel prefix="right_2" reflect="-1" radius="0.1" length = "0.075" mass = "119.76  " x_offset="0.05" y_offset="0" base_x="0.1" base_y="0.3" />
+    <xacro:wheel prefix="left_3" reflect="1" radius="0.1" length = "0.075" mass = "119.76  " x_offset="0.3" y_offset="0" base_x="0.1" base_y="0.3" />
+    <xacro:wheel prefix="right_3" reflect="-1" radius="0.1" length = "0.075" mass = "119.76  " x_offset="0.3" y_offset="0" base_x="0.1" base_y="0.3" />
+
+    <ros2_control name="IgnitionSystem" type="system">
+        <hardware>
+          <plugin>ign_ros2_control/IgnitionSystem</plugin>
+        </hardware>
+        <joint name="left_1_wheel_joint">
+          <command_interface name="velocity">
+            <param name="min">-5</param>
+            <param name="max">5</param>
+          </command_interface>
+          <state_interface name="position"/>
+          <state_interface name="velocity"/>
+        </joint>
+        <joint name="right_1_wheel_joint">
+          <command_interface name="velocity">
+            <param name="min">-5</param>
+            <param name="max">5</param>
+          </command_interface>
+          <state_interface name="position"/>
+          <state_interface name="velocity"/>
+        </joint>
+        <joint name="left_2_wheel_joint">
+          <command_interface name="velocity">
+            <param name="min">-5</param>
+            <param name="max">5</param>
+          </command_interface>
+          <state_interface name="position"/>
+          <state_interface name="velocity"/>
+        </joint>
+        <joint name="right_2_wheel_joint">
+          <command_interface name="velocity">
+            <param name="min">-5</param>
+            <param name="max">5</param>
+          </command_interface>
+          <state_interface name="position"/>
+          <state_interface name="velocity"/>
+        </joint>
+        <joint name="left_3_wheel_joint">
+          <command_interface name="velocity">
+            <param name="min">-5</param>
+            <param name="max">5</param>
+          </command_interface>
+          <state_interface name="position"/>
+          <state_interface name="velocity"/>
+        </joint>
+        <joint name="right_3_wheel_joint">
+          <command_interface name="velocity">
+            <param name="min">-5</param>
+            <param name="max">5</param>
+          </command_interface>
+          <state_interface name="position"/>
+          <state_interface name="velocity"/>
+        </joint>
+      </ros2_control>
+    
+      <gazebo>
+        <!-- Joint state publisher -->
+        <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+          <parameters>$(find urfi_control)/config/urfi_controllers.yaml</parameters>
+        </plugin>
+      </gazebo>
+
+</robot>

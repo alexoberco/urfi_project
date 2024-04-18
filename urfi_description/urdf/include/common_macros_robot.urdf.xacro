@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="base" params= "link_name:='base_link' mass x_size y_size z_size roll_offset pitch_offset yaw_offset color">
+        <link name="${link_name}">
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="${roll_offset} ${pitch_offset} ${yaw_offset}"/>
+                <geometry>
+                    <box size="${x_size} ${y_size} ${z_size}"/>
+                </geometry>
+                <material name="${color}"/>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                <geometry>
+                    <box size="${z_size} ${x_size} ${y_size}"/>
+                </geometry>
+            </collision>
+            <xacro:box_inertia mass="${mass}" x ="${x_size}" y ="${y_size}" z ="${z_size}"/>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="wheel" params="prefix reflect radius length mass x_offset y_offset base_x base_y">
+        <xacro:property name="pos_x_joint" value="${base_x/2 - x_offset}"/>
+        <xacro:property name="pos_y_joint" value="${base_y/2 + y_offset}"/>
+        <xacro:property name="pos_z_joint" value="0"/>
+
+        
+        <link name="${prefix}_wheel">
+            <visual>
+                <origin xyz="0 ${reflect * length} 0" rpy="${-1 * reflect * pi/2} 0 0"/>
+                <geometry>
+                    <mesh filename="file:///home/alexoberco/Escritorio/ros2_ws/src/urfi_project/urfi_description/meshes/wheel.stl" scale="${length} ${length} ${length}"/>
+                </geometry>
+                <material name="dark_grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 ${reflect * (length/2)} 0" rpy="${pi/2} 0 0"/>
+                <geometry>
+                    <cylinder radius="${radius}" length="${length}"/>
+                </geometry>
+            </collision>
+            <xacro:cylinder_inertia mass="${mass}" radius="${radius}" length="${length}" />
+        </link>
+
+        <joint name="${prefix}_wheel_joint" type="continuous">
+        <axis xyz="0 1 0" rpy="0 0 0" />
+        <parent link="base_link"/>
+        <child link="${prefix}_wheel"/>
+        <origin xyz="${pos_x_joint} ${reflect* pos_y_joint} ${pos_z_joint}" rpy="0 0.0 0"/>
+        <dynamics damping="0.01" friction="0.0"/>
+        </joint>
+    </xacro:macro>
+    
+</robot>
