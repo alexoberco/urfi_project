@@ -86,7 +86,7 @@
     <visual>
       <origin rpy="1.5707963267948966 0 0" xyz="0 -0.075 0"/>
       <geometry>
-        <mesh filename="file:///home/rosuser/ws/src/urfi_project/urfi_description/meshes/wheel.stl" scale="0.075 0.075 0.075"/>
+        <mesh filename="file:///src/urfi_project/urfi_description/meshes/wheel.stl" scale="0.075 0.075 0.075"/>
       </geometry>
       <material name="dark_grey"/>
     </visual>

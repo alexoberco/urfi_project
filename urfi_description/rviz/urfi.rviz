@@ -8,12 +8,9 @@ Panels:
         - /Status1
         - /TF1
         - /TF1/Frames1
-        - /TF1/Frames1/odom1
-        - /TF1/Frames1/odom1/Position1
-        - /TF1/Frames1/odom1/Orientation1
-        - /TF1/Frames1/odom1/Relative Position1
         - /RobotModel1
-        - /RobotModel1/Status1
+        - /LaserScan1
+        - /LaserScan1/Topic1
       Splitter Ratio: 0.5
     Tree Height: 434
   - Class: rviz_common/Selection
@@ -62,6 +59,8 @@ Visualization Manager:
         All Enabled: true
         base_footprint:
           Value: true
+        base_lidar_link:
+          Value: true
         base_link:
           Value: true
         left_1_wheel:
@@ -69,6 +68,8 @@ Visualization Manager:
         left_2_wheel:
           Value: true
         left_3_wheel:
+          Value: true
+        lidar_link:
           Value: true
         odom:
           Value: true
@@ -84,8 +85,11 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        odom:
+        base_footprint:
           base_link:
+            base_lidar_link:
+              lidar_link:
+                {}
             left_1_wheel:
               {}
             left_2_wheel:
@@ -98,6 +102,8 @@ Visualization Manager:
               {}
             right_3_wheel:
               {}
+        odom:
+          {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -122,6 +128,11 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        base_lidar_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
@@ -138,6 +149,11 @@ Visualization Manager:
           Show Trail: false
           Value: true
         left_3_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        lidar_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -165,6 +181,40 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/LaserScan
+      Color: 255; 255; 255
+      Color Transformer: ""
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: LaserScan
+      Position Transformer: ""
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.03999999910593033
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10000
+        History Policy: Keep Last
+        Reliability Policy: Best Effort
+        Value: /scan
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -211,7 +261,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 4.368900775909424
+      Distance: 8.368020057678223
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -226,7 +276,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.45979642868042
+      Pitch: 1.4647964239120483
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
       Yaw: 1.7403903007507324

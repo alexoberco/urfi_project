@@ -30,7 +30,7 @@
             <visual>
                 <origin xyz="0 ${reflect * length} 0" rpy="${-1 * reflect * pi/2} 0 0"/>
                 <geometry>
-                    <mesh filename="file:///home/rosuser/ws/src/urfi_project/urfi_description/meshes/wheel.stl" scale="${length} ${length} ${length}"/>
+                    <mesh filename="file:///home/alexoberco/Escritorio/ros2_ws/src/urfi_project/urfi_description/meshes/wheel.stl" scale="${length} ${length} ${length}"/>
                 </geometry>
                 <material name="dark_grey"/>
             </visual>
