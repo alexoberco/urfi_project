@@ -46,6 +46,15 @@ def generate_launch_description():
                    '-name', 'urfi',
                    '-allow_renaming', 'true'],
     )
+    # Define the bridge for LIDAR data
+    lidar_bridge = ExecuteProcess(
+        cmd=[
+            'ros2', 'run', 'ros_gz_bridge', 'parameter_bridge',
+            '/lidar@sensor_msgs/msg/LaserScan@ignition.msgs.LaserScan',
+            '--ros-args', '--remap', '/lidar:=/scan'
+        ],
+        output='screen'
+    )
 
     load_joint_state_controller = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
@@ -96,6 +105,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         bridge,
+        lidar_bridge,
         # Launch gazebo environment
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
