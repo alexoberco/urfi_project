@@ -56,29 +56,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    load_joint_state_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'joint_state_broadcaster'],
-        output='screen'
-    )
-
-    load_diff_controller_1 = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'diff_controller_1'],
-        output='screen'
-    )
-
-    load_diff_controller_2 = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'diff_controller_2'],
-        output='screen'
-    )
-
-    load_diff_controller_3 = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'diff_controller_3'],
-        output='screen'
-    )
 
     # Bridge
     bridge = Node(
@@ -106,33 +83,26 @@ def generate_launch_description():
     return LaunchDescription([
         bridge,
         lidar_bridge,
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(get_package_share_directory('urfi_control'),
+                'launch', 'urfi_control.launch.py'))),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(get_package_share_directory('urfi_navigation'),
+                'launch', 'slam.launch.py'))),
+    
         # Launch gazebo environment
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 [os.path.join(get_package_share_directory('ros_ign_gazebo'),
                               'launch', 'ign_gazebo.launch.py')]),
-            launch_arguments=[('gz_args', [' -r -v 4 src/urfi_project/urfi_description/worlds/building_robot.sdf'])]),
-        RegisterEventHandler(
-            event_handler=OnProcessExit(
-                target_action=ignition_spawn_entity,
-                on_exit=[load_joint_state_controller],
-            )
-        ),
-        RegisterEventHandler(
-            event_handler=OnProcessExit(
-                target_action=load_joint_state_controller,
-                on_exit=[load_diff_controller_1, load_diff_controller_2, load_diff_controller_3],
-            )
-        ),
-        RegisterEventHandler(
-            event_handler=OnProcessExit(
-                target_action=load_diff_controller_3,
-                on_exit=[urfi_starter_node],
-            )
-        ),
+            launch_arguments=[('gz_args', [' -r -v 4 src/urfi_project/urfi_description/worlds/urfi_world.sdf'])]),
+
         node_robot_state_publisher,
         ignition_spawn_entity,
         node_rviz,
+        urfi_starter_node,
         # Launch Arguments
         DeclareLaunchArgument(
             'use_sim_time',
