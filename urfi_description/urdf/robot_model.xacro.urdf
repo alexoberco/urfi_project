@@ -4,14 +4,7 @@
     <xacro:include filename="$(find ${package_name})/urdf/include/common_inertial_math.urdf.xacro" />
     <xacro:include filename="$(find ${package_name})/urdf/include/material.urdf.xacro" />
     <xacro:include filename="$(find ${package_name})/urdf/include/common_macros_robot.urdf.xacro" />
-    <link name="base_footprint"/>
-
-    <joint name="base_joint" type="fixed">
-        <parent link="base_footprint"/>
-        <child link="base_link"/>
-        <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0"/>
-    </joint>
-
+    
     <xacro:base mass="19.95" x_size="0.3" y_size="0.1" z_size="0.7" roll_offset="1.5708" pitch_offset="0.0" yaw_offset="1.5708" color="blue"/>
     <joint name="base_lidar_joint" type="fixed">
       <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0"/>
