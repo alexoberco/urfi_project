@@ -89,23 +89,22 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        base_footprint:
-          base_link:
-            base_lidar_link:
-              lidar_link:
-                {}
-            left_1_wheel:
+        base_link:
+          base_lidar_link:
+            lidar_link:
               {}
-            left_2_wheel:
-              {}
-            left_3_wheel:
-              {}
-            right_1_wheel:
-              {}
-            right_2_wheel:
-              {}
-            right_3_wheel:
-              {}
+          left_1_wheel:
+            {}
+          left_2_wheel:
+            {}
+          left_3_wheel:
+            {}
+          right_1_wheel:
+            {}
+          right_2_wheel:
+            {}
+          right_3_wheel:
+            {}
         map:
           {}
         odom:
@@ -230,7 +229,7 @@ Visualization Manager:
       Topic:
         Depth: 5
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 10000
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /map

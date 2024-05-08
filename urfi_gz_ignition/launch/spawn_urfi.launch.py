@@ -44,7 +44,10 @@ def generate_launch_description():
         output='screen',
         arguments=['-string', doc.toxml(),
                    '-name', 'urfi',
-                   '-allow_renaming', 'true'],
+                   '-allow_renaming', 'true',
+                   '-x','0.0',
+                   '-y','0.0',
+                   '-z','0.1'],
     )
     # Define the bridge for LIDAR data
     lidar_bridge = ExecuteProcess(
