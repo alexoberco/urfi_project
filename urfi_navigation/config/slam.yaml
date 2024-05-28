@@ -14,17 +14,23 @@ slam_toolbox:
     map_frame: map
     base_frame: base_link
     scan_topic: scan
+    scan_rate: 7.0 
     mode: mapping
 
     #toolbox
     debug_logging: false
     throttle_scan: 1
-    transform_publish_period: 0.02
-    map_update_interval: 0.5
-    resolution: 0.05
+    transform_publish_period: 0.07
+    map_update_interval: 3.0
+    resolution: 0.05  # Resolución del mapa en metros por celda
+    map_size_x: 1000  # Tamaño máximo del mapa en celdas en la dirección X
+    map_size_y: 1000  # Tamaño máximo del mapa en celdas en la dirección Y
+    max_swatches: 5  # Número máximo de swatches
     max_laser_range: 10.0
     minimum_time_interval: 0.25
-    transform_timeout: 0.2
+    transform_timeout: 0.5
+    transform_queue_size: 150
+    tf_buffer_size: 120.0
     tf_buffer_duration: 30.0
     stack_size_to_use: 40000000
     enable_interactive_mode: false
@@ -34,7 +40,7 @@ slam_toolbox:
     use_scan_barycenter: true
     minimum_travel_distance: 0.0
     minimum_travel_heading: 0.0
-    scan_buffer_size: 20
+    scan_buffer_size: 40
     scan_buffer_maximum_scan_distance: 10.0
     link_match_minimum_response_fine: 0.1
     link_scan_maximum_distance: 1.5
