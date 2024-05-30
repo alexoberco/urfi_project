@@ -1,47 +1,43 @@
 slam_toolbox:
   ros__parameters:
 
-    #solver
-    solve_plugin: solver_plugins::CeresSolver
+    # Solver params
+    solver_plugin: solver_plugins::CeresSolver
     ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
     ceres_preconditioner: SCHUR_JACOBI
     ceres_trust_strategy: LEVENBERG_MARQUARDT
     ceres_dogleg_type: TRADITIONAL_DOGLEG
     ceres_loss_function: None
 
-    #ros
+    # ROS Parameters
     odom_frame: odom
     map_frame: map
     base_frame: base_link
     scan_topic: scan
-    scan_rate: 7.0 
     mode: mapping
 
-    #toolbox
-    debug_logging: false
-    throttle_scan: 1
-    transform_publish_period: 0.07
-    map_update_interval: 3.0
-    resolution: 0.05  # Resolución del mapa en metros por celda
-    map_size_x: 1000  # Tamaño máximo del mapa en celdas en la dirección X
-    map_size_y: 1000  # Tamaño máximo del mapa en celdas en la dirección Y
-    max_swatches: 5  # Número máximo de swatches
-    max_laser_range: 10.0
-    minimum_time_interval: 0.25
-    transform_timeout: 0.5
-    transform_queue_size: 150
-    tf_buffer_size: 120.0
-    tf_buffer_duration: 30.0
-    stack_size_to_use: 40000000
-    enable_interactive_mode: false
 
-    #general parameters
-    use_scan_maching: true
+
+    #TOOLBOX
+    debug_logging: false
+    throttle_scans: 1 #set mode
+    transform_publish_period: 0.02 #if 0 never publishes odometry
+    map_update_interval: 0.5
+    resolution: 0.05
+    max_laser_range: 12.0 #for rastering images
+    minimum_time_interval: 0.25
+    transform_timeout: 0.2
+    tf_buffer_duration: 30.
+    stack_size_to_use: 40000000 #// program needs a larger stack size to serialize large maps
+    enable_interactive_mode: true
+
+    # General Parameters
+    use_scan_matching: true
     use_scan_barycenter: true
     minimum_travel_distance: 0.0
     minimum_travel_heading: 0.0
-    scan_buffer_size: 40
-    scan_buffer_maximum_scan_distance: 10.0
+    scan_buffer_size: 20
+    scan_buffer_maximum_scan_distance: 12.0
     link_match_minimum_response_fine: 0.1
     link_scan_maximum_distance: 1.5
     loop_search_maximum_distance: 3.0
@@ -51,23 +47,23 @@ slam_toolbox:
     loop_match_minimum_response_coarse: 0.35
     loop_match_minimum_response_fine: 0.45
 
-    #correlation parameters
-    correlation_search_space_dimention: 0.5
+    # Correlation Parameters - Correlation Parameters
+    correlation_search_space_dimension: 0.5
     correlation_search_space_resolution: 0.01
     correlation_search_space_smear_deviation: 0.1
 
-    #loop closure parameters
-    loop_search_space_dimention: 8.0
+    # Correlation Parameters - Loop Closure Parameters
+    loop_search_space_dimension: 8.0
     loop_search_space_resolution: 0.05
     loop_search_space_smear_deviation: 0.03
 
-    #scan matcher parameters 
+    # Scan Matcher Parameters
     distance_variance_penalty: 0.5
     angle_variance_penalty: 1.0
 
     fine_search_angle_offset: 0.00349
     coarse_search_angle_offset: 0.349
-    coarse_angle_resolution: 0.00349
+    coarse_angle_resolution: 0.0349
     minimum_angle_penalty: 0.9
     minimum_distance_penalty: 0.5
     use_response_expansion: true
