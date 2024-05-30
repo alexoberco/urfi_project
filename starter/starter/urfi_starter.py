@@ -31,17 +31,21 @@ class TeleopMultiController(Node):
         self.publisher3.publish(msg)
 
     def increase_x(self, event=None):
-        if self.linear_x<3.0:
+        if self.linear_x<2.0 and self.linear_x<0.2:
+            self.linear_x += 0.3
+        elif self.linear_x>0.2:
             self.linear_x += 0.1
         else:
-            self.linear_x = 3.0
+            self.linear_x = 2.0
         self.publish_cmd_vel()
 
     def decrease_x(self, event=None):
-        if self.linear_x > -3.0:
+        if self.linear_x > -2.0 and self.linear_x > -0.2:
+            self.linear_x -= 0.3
+        elif self.linear_x < -0.2:
             self.linear_x -= 0.1
         else:
-            self.linear_x = -3.0
+            self.linear_x = -2.0
         self.publish_cmd_vel()
 
     def increase_z(self, event=None):

@@ -228,7 +228,7 @@ Visualization Manager:
       Name: Map
       Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: Transient local
         Filter size: 10000
         History Policy: Keep Last
         Reliability Policy: Reliable

@@ -16,7 +16,7 @@ import xacro
 
 def generate_launch_description():
     # Launch Arguments
-    use_sim_time = LaunchConfiguration('use_sim_time', default=True)
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
     urfi_path = os.path.join(
         get_package_share_directory('urfi_description'))
@@ -68,11 +68,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    urfi_starter_node = Node(
-        package='starter',
-        executable='urfi_starter',
-        output='screen'
-    )
 
     node_rviz = Node(
         package='rviz2',
@@ -87,13 +82,9 @@ def generate_launch_description():
         bridge,
         lidar_bridge,
         IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
+           PythonLaunchDescriptionSource(
                 os.path.join(get_package_share_directory('urfi_control'),
                 'launch', 'urfi_control.launch.py'))),
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                os.path.join(get_package_share_directory('urfi_navigation'),
-                'launch', 'slam.launch.py'))),
     
         # Launch gazebo environment
         IncludeLaunchDescription(
@@ -105,7 +96,6 @@ def generate_launch_description():
         node_robot_state_publisher,
         ignition_spawn_entity,
         node_rviz,
-        urfi_starter_node,
         # Launch Arguments
         DeclareLaunchArgument(
             'use_sim_time',
