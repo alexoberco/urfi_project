@@ -64,6 +64,7 @@ def launch_setup(context, *args, **kwargs):
         PushRosNamespace(namespace),
         SetRemap(namespace_str + '/global_costmap/scan', namespace_str + '/scan'),
         SetRemap(namespace_str + '/local_costmap/scan', namespace_str + '/scan'),
+        SetRemap(src='/cmd_vel', dst='/diff_controller_2/cmd_vel'),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(launch_nav2),
@@ -71,6 +72,8 @@ def launch_setup(context, *args, **kwargs):
                   ('use_sim_time', use_sim_time),
                   ('params_file', nav2_params.perform(context)),
                   ('use_composition', 'False'),
+                  ('autostart', 'True'),
+                  ('bond_timeout', '0.0'),
                   ('namespace', namespace_str)
                 ]
         ),
