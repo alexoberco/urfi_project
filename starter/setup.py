@@ -23,7 +23,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'urfi_starter = starter.urfi_starter:main'
+            'urfi_starter = starter.urfi_starter:main',
+            'cmd_vel_replicator = starter.cmd_vel_replicator:main',
+            'odom_replicator = starter.odom_replicator:main'
         ],
     },
 )

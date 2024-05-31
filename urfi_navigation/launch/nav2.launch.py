@@ -64,7 +64,7 @@ def launch_setup(context, *args, **kwargs):
         PushRosNamespace(namespace),
         SetRemap(namespace_str + '/global_costmap/scan', namespace_str + '/scan'),
         SetRemap(namespace_str + '/local_costmap/scan', namespace_str + '/scan'),
-        SetRemap(src='/cmd_vel', dst='/diff_controller_2/cmd_vel'),
+        SetRemap(src='/cmd_vel', dst='/cmd_vel'),
 
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(launch_nav2),

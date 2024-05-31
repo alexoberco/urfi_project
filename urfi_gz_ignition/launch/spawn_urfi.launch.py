@@ -20,10 +20,8 @@ def generate_launch_description():
 
     urfi_path = os.path.join(
         get_package_share_directory('urfi_description'))
-    rviz_config_path = 'src/urfi_project/urfi_description/rviz/urfi.rviz'
-    xacro_file = os.path.join(urfi_path,
-                              'urdf',
-                              'robot_model.xacro.urdf')
+    rviz_config_path = os.path.join(urfi_path,'rviz', 'urfi.rviz')
+    xacro_file = os.path.join(urfi_path, 'urdf', 'robot_model.xacro.urdf')
 
     doc = xacro.parse(open(xacro_file))
     xacro.process_doc(doc)
@@ -37,6 +35,19 @@ def generate_launch_description():
         output='screen',
         parameters=[params],
     )
+
+    cmd_vel_replicator_node = Node(
+        package='starter',
+        executable='cmd_vel_replicator',
+        output='screen'
+    )
+
+    odom_replicator_node = Node(
+        package='starter',
+        executable='odom_replicator',
+        output='screen'
+    )
+
 
     ignition_spawn_entity = Node(
         package='ros_gz_sim',
@@ -96,6 +107,8 @@ def generate_launch_description():
         node_robot_state_publisher,
         ignition_spawn_entity,
         node_rviz,
+        cmd_vel_replicator_node,
+        odom_replicator_node,
         # Launch Arguments
         DeclareLaunchArgument(
             'use_sim_time',
