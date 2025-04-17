@@ -2,7 +2,12 @@
 URFI_project simulates a six‑wheeled rover in Ignition Fortress Gazebo using ROS 2 Humble on Ubuntu 22.04, providing modular packages for robot description, control, simulation integration, and autonomous navigation&#8203;.
 
 ## Video Demonstration
-[![URFI Rover Demo](https://img.youtube.com/vi/qBmY7B5HzhM/0.jpg)](https://youtu.be/qBmY7B5HzhM)  
+
+
+https://github.com/user-attachments/assets/378ccfe0-62f9-42ac-a966-f4c31a8fbbad
+
+
+
 Click to watch the rover navigating a custom world in Ignition Fortress&#8203;.
 
 ## Prerequisites
